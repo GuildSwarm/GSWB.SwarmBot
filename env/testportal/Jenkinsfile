@@ -83,7 +83,7 @@ pipeline {
                     node ('kubectl-1.28'){
                         container ('kube'){
                             sh 'mkdir -p ~/.kube/'
-                            withCredentials([file(credentialsId: 'backend', variable: 'KUBECONFIG_FILE')]) {
+                            withCredentials([file(credentialsId: 'backend-testportal', variable: 'KUBECONFIG_FILE')]) {
                             // Move the credentials to a temporary location
                             sh "mv ${KUBECONFIG_FILE} ~/.kube/config"
                             }
