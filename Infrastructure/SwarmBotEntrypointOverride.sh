@@ -9,23 +9,6 @@ set -e
 # "import" service await functions
 source wait_for_service.sh
 
-# Execute tasks before the base entrypoint starts
-execute_before_start() {
-    echo "Executing scheduled tasks before the base entrypoint starts..."	
-    wait_IsReady vault.vault.svc.cluster.local 9200 # Vault waits until consul is ready :)
-    echo "Scheduled tasks before the base entrypoint starts..DONE."
-}
-
-
-
-# Execute tasks after the base entrypoint started.
-execute_after_start() {
-    echo "Executing scheduled tasks after the base entrypoint started..."	
-    wait_for_health_endpoint
-    ./IsReadyServer.sh &	
-    echo "Scheduled tasks after the base entrypoint started..DONE."
-}
-
 # Main function that orchestrates the execution of the script, executing first the function with the custom logic that should be executed before calling the base entrypoint. 
 # Secondly calls the base entrypoint and finally executed the function with the custom logic that should be executed after the base entripoint is called.
 main() {
