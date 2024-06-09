@@ -12,9 +12,6 @@ source wait_for_service.sh
 # Main function that orchestrates the execution of the script, executing first the function with the custom logic that should be executed before calling the base entrypoint. 
 # Secondly calls the base entrypoint and finally executed the function with the custom logic that should be executed after the base entripoint is called.
 main() {
-    echo "Starting entrypoint override" 
-    execute_before_start
-
     echo "Calling base Entrypoint"
     #dotnet SwarmBot.API.dll &
 	./SwarmBot.API &
